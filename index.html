@@ -3,106 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Brisa ❤️</title>
+<title>Brisa ❤️</title>
 
 <style>
-body {
-    margin: 0;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff9ec4, #ffd6e7);
-    text-align: center;
-    color: #7a003c;
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ff8fb1,#ffc2d1);
+  font-family: Arial, sans-serif;
+  overflow:hidden;
 }
 
-.container {
-    position: relative;
-    z-index: 2;
-    top: 15%;
+.card{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  max-width:320px;
 }
 
-h1 {
-    font-size: 3rem;
-    animation: fadeIn 2s ease-in-out;
+h1{
+  color:#c2185b;
 }
 
-h2 {
-    font-weight: normal;
+button{
+  padding:12px 22px;
+  font-size:18px;
+  border:none;
+  border-radius:12px;
+  margin:10px;
+  cursor:pointer;
 }
 
-button {
-    padding: 14px 26px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 10px;
-    background: #d81b60;
-    color: white;
-    cursor: pointer;
+#yes{
+  background:#e91e63;
+  color:white;
 }
 
-#mensaje {
-    display: none;
-    margin-top: 30px;
-    font-size: 1.4rem;
-    animation: fadeIn 2s ease-in-out;
+#no{
+  background:#eee;
 }
 
-.heart {
-    position: absolute;
-    bottom: -50px;
-    font-size: 24px;
-    animation: floatUp linear infinite;
+#final{
+  display:none;
+  font-size:20px;
+  color:#c2185b;
 }
 
-@keyframes floatUp {
-    to {
-        transform: translateY(-110vh);
-        opacity: 0;
-    }
+/* corazones */
+.heart{
+ position:absolute;
+ font-size:20px;
+ animation:up 5s linear infinite;
 }
 
-@keyframes fadeIn {
-    from {opacity:0; transform: translateY(20px);}
-    to {opacity:1; transform: translateY(0);}
+@keyframes up{
+ to{
+  transform:translateY(-110vh);
+  opacity:0;
+ }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>Brisa 💖</h1>
-    <h2>Mensaje especial de</h2>
-    <h3>Antonio Velásquez</h3>
+<div class="card" id="card">
+  <h1>Brisa 💖</h1>
+  <p>Mensaje de Antonio Velásquez</p>
+  <p>¿Quieres ser mi San Valentín?</p>
 
-    <button onclick="mostrar()">Abrir mensaje 💌</button>
+  <button id="yes" onclick="acepto()">Sí 💘</button>
+  <button id="no" onmouseover="escapa()">No 🙈</button>
 
-    <div id="mensaje">
-        Desde que llegaste a mi vida todo es más bonito.<br><br>
-        Tu sonrisa ilumina mis días y tu forma de ser me enamora más cada vez.<br><br>
-        💘 ¿Quieres ser mi San Valentín? 💘<br><br>
-        Con amor,<br>
-        Antonio Velásquez
-    </div>
+  <div id="final">
+    💞 Sabía que dirías que sí 💞<br><br>
+    Te quiero mucho Brisa ❤️<br>
+    — Antonio Velásquez
+  </div>
 </div>
 
 <script>
-function mostrar(){
-    document.getElementById("mensaje").style.display = "block";
+function acepto(){
+  document.getElementById("final").style.display="block";
 }
 
-function crearCorazon(){
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💗";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.animationDuration = (3 + Math.random()*4) + "s";
-    document.body.appendChild(heart);
-    setTimeout(()=> heart.remove(), 7000);
+/* botón que escapa */
+function escapa(){
+  const b=document.getElementById("no");
+  b.style.position="absolute";
+  b.style.left=Math.random()*80+"vw";
+  b.style.top=Math.random()*80+"vh";
 }
 
-setInterval(crearCorazon, 300);
+/* corazones flotando */
+function heart(){
+ const h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="💗";
+ h.style.left=Math.random()*100+"vw";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),5000);
+}
+setInterval(heart,400);
 </script>
 
 </body>
 </html>
+
