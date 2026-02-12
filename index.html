@@ -3,97 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>De: Antonio Para: Brisa</title>
+    <title>💕 VALENTINE 💕</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background-color: #ff4d4d; /* El rojo característico de esa web */
+            box-sizing: border-box;
+        }
+        body {
             font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            color: white;
-            overflow: hidden;
-        }
-
-        .card {
-            text-align: center;
             padding: 20px;
+            color: #5a3d5c;
         }
-
-        .initial-content h1 {
-            font-size: 2.5rem;
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px 30px;
+            text-align: center;
+            border: 3px solid white;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .inicio, .pregunta, .aceptado {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+        .activo {
+            display: flex;
+        }
+        h1 {
+            font-size: 3rem;
             margin-bottom: 20px;
-            font-weight: bold;
+            color: #d43f5e;
+            text-shadow: 2px 2px 0 rgba(255,255,255,0.5);
         }
-
-        .btn-open {
-            background-color: white;
-            color: #ff4d4d;
-            border: none;
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-        }
-
-        .btn-open:hover {
-            transform: scale(1.1);
-        }
-
-        .message-content {
-            display: none; /* Oculto al inicio */
-            animation: fadeIn 1s ease-in;
-        }
-
-        .message-content h2 {
+        h2 {
             font-size: 2rem;
-            margin-bottom: 10px;
+            color: #b3415c;
+            margin-bottom: 15px;
         }
-
-        .message-content p {
-            font-size: 1.4rem;
-            max-width: 400px;
-            margin: 0 auto;
+        p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: #642f3f;
         }
-
-        .footer-name {
-            margin-top: 30px;
+        .botones {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            color: white;
+        }
+        .btn-si {
+            background: #ff6b8b;
+            box-shadow: 0 5px 0 #c13b55;
+        }
+        .btn-si:hover {
+            transform: scale(1.05);
+            background: #ff8ca0;
+            box-shadow: 0 8px 0 #c13b55;
+        }
+        .btn-no {
+            background: #a5a5a5;
+            box-shadow: 0 5px 0 #6e6e6e;
+            position: relative;
+        }
+        .btn-no:hover {
+            transform: scale(0.95);
+            background: #b8b8b8;
+        }
+        .corazones {
+            font-size: 2.5rem;
+            margin-top: 20px;
+            letter-spacing: 15px;
+        }
+        .mensaje-especial {
+            background: rgba(255, 214, 221, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
             font-style: italic;
-            opacity: 0.9;
+            border-left: 5px solid #ff6b8b;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .btn-reinicio {
+            margin-top: 30px;
+            background: #d48c9c;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-reinicio:hover {
+            background: #b86b7e;
+        }
+        @media (max-width: 480px) {
+            .container { padding: 30px 20px; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.6rem; }
+            p { font-size: 1.1rem; }
+            .btn { padding: 12px 30px; }
         }
     </style>
 </head>
 <body>
-
-    <div class="card">
-        <div id="start" class="initial-content">
-            <h1>Para: Brisa ❤️</h1>
-            <button class="btn-open" onclick="revealMessage()">CLIC AQUÍ</button>
+    <div class="container">
+        <!-- Pantalla 1: Inicio -->
+        <div id="inicio" class="inicio activo">
+            <h1>💕 VALENTINE 💕</h1>
+            <p style="font-size: 1.5rem;">Presiona cualquier tecla para comenzar...</p>
         </div>
 
-        <div id="message" class="message-content">
-            <h2>¡Feliz San Valentín!</h2>
-            <p>Eres la persona más especial en mi vida. Gracias por ser mi novia y por cada momento juntos.</p>
-            <div class="footer-name">De: Antonio Velásquez</div>
+        <!-- Pantalla 2: Pregunta -->
+        <div id="pregunta" class="pregunta">
+            <h2 id="preguntaTexto">Brisa, ¿quieres ser mi Valentine?</h2>
+            <div class="botones">
+                <button id="btnSi" class="btn btn-si">💖 SÍ</button>
+                <button id="btnNo" class="btn btn-no">💔 NO</button>
+            </div>
+        </div>
+
+        <!-- Pantalla 3: Aceptado -->
+        <div id="aceptado" class="aceptado">
+            <h2>¡Gracias Brisa por aceptar! 💕</h2>
+            <div class="mensaje-especial">
+                <p>Antonio: Me haces muy feliz. Eres mi persona favorita.</p>
+            </div>
+            <p style="font-size: 1.6rem;">Te quiero mucho, Brisa. Gracias por decir que sí. 💕</p>
+            <div class="corazones">💕 💖 💗 💝 💞</div>
+            <button id="btnReinicio" class="btn-reinicio">✨ Crear otro momento ✨</button>
         </div>
     </div>
 
     <script>
-        function revealMessage() {
-            document.getElementById('start').style.display = 'none';
-            document.getElementById('message').style.display = 'block';
-        }
+        (function() {
+            "use strict";
+
+            // ---------- CONFIGURACIÓN PERSONALIZABLE ----------
+            // Cambia estos valores para personalizar la tarjeta
+            const NOMBRE_PERSONA_ESPECIAL = "Brisa";   // ¿A quién va dedicado?
+            const NOMBRE_TUYO = "Antonio";            // Tu nombre
+            const TIPO_RELACION = "novios";           // Ej: novios, amigos, crush...
+            // ------------------------------------------------
+
+            // Elementos del DOM
+            const pantallaInicio = document.getElementById('inicio');
+            const pantallaPregunta = document.getElementById('pregunta');
+            const pantallaAceptado = document.getElementById('aceptado');
+            const preguntaTexto = document.getElementById('preguntaTexto');
+            const btnSi = document.getElementById('btnSi');
+            const btnNo = document.getElementById('btnNo');
+            const btnReinicio = document.getElementById('btnReinicio');
+
+            // Variable para controlar si ya comenzó
+            let juegoIniciado = false;
+
+            // Función para iniciar (pasar de inicio a pregunta)
+            function iniciarJuego() {
+                if (!juegoIniciado) {
+                    juegoIniciado = true;
+                    // Actualizar textos personalizados
+                    preguntaTexto.textContent = `${NOMBRE_PERSONA_ESPECIAL}, ¿quieres ser mi Valentine?`;
+                    
+                    // Cambiar pantallas
+                    pantallaInicio.classList.remove('activo');
+                    pantallaPregunta.classList.add('activo');
+                    pantallaAceptado.classList.remove('activo');
+                }
+            }
+
+            // Evento para presionar cualquier tecla en la pantalla de inicio
+            window.addEventListener('keydown', function(e) {
+                if (pantallaInicio.classList.contains('activo')) {
+                    iniciarJuego();
+                }
+            });
+
+            // También permitir hacer clic en cualquier parte de la pantalla de inicio
+            pantallaInicio.addEventListener('click', function() {
+                iniciarJuego();
+            });
+
+            // Función para el SÍ
+            function aceptarInvitacion() {
+                // Actualizar mensaje de aceptado con los nombres personalizados
+                const mensajePrincipal = pantallaAceptado.querySelector('.mensaje-especial p');
+                mensajePrincipal.innerHTML = `${NOMBRE_TUYO}: Me haces muy feliz. Eres mi persona favorita.`;
+                
+                const textoGracias = pantallaAceptado.querySelector('p[style="font-size: 1.6rem;"]');
+                if (textoGracias) {
+                    textoGracias.innerHTML = `Te quiero mucho, ${NOMBRE_PERSONA_ESPECIAL}. Gracias por decir que sí. 💕`;
+                }
+
+                // Cambiar a pantalla de aceptado
+                pantallaInicio.classList.remove('activo');
+                pantallaPregunta.classList.remove('activo');
+                pantallaAceptado.classList.add('activo');
+            }
+
+            btnSi.addEventListener('click', aceptarInvitacion);
+
+            // Función para que el botón NO huya
+            function moverBotonNo() {
+                const botonNo = btnNo;
+                const maxX = window.innerWidth - botonNo.offsetWidth - 100;
+                const maxY = window.innerHeight - botonNo.offsetHeight - 100;
+                
+                // Generar posiciones aleatorias
+                let randomX = Math.random() * maxX;
+                let randomY = Math.random() * maxY;
+                
+                // Asegurar que no se salga de los límites visibles
+                randomX = Math.max(10, Math.min(randomX, maxX));
+                randomY = Math.max(10, Math.min(randomY, maxY));
+                
+                botonNo.style.position = 'fixed';
+                botonNo.style.left = randomX + 'px';
+                botonNo.style.top = randomY + 'px';
+                botonNo.style.zIndex = '1000';
+            }
+
+            btnNo.addEventListener('mouseover', moverBotonNo);
+            btnNo.addEventListener('click', function(e) {
+                e.preventDefault();
+                moverBotonNo();
+            });
+
+            // Botón de reinicio para volver a empezar
+            btnReinicio.addEventListener('click', function() {
+                // Restablecer estado
+                juegoIniciado = false;
+                
+                // Resetear posición del botón NO
+                btnNo.style.position = 'relative';
+                btnNo.style.left = 'auto';
+                btnNo.style.top = 'auto';
+                
+                // Mostrar solo pantalla de inicio
+                pantallaInicio.classList.add('activo');
+                pantallaPregunta.classList.remove('activo');
+                pantallaAceptado.classList.remove('activo');
+            });
+
+            // Personalización adicional basada en el tipo de relación (opcional)
+            if (TIPO_RELACION === "novios") {
+                // Puedes añadir detalles extra si quieres
+                document.querySelector('.corazones').innerHTML = '💕 💖 💗 💝 💞';
+            } else if (TIPO_RELACION === "amigos") {
+                document.querySelector('.corazones').innerHTML = '💛 💚 💙 💜 🧡';
+            }
+        })();
     </script>
 </body>
 </html>
