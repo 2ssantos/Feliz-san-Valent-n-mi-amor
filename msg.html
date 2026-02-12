@@ -30,7 +30,6 @@
             padding: 40px 30px;
             text-align: center;
             border: 3px solid white;
-            position: relative;
             transition: all 0.3s ease;
         }
         .inicio, .pregunta, .aceptado {
@@ -138,7 +137,7 @@
 
         <!-- Pantalla 2: Pregunta -->
         <div id="pregunta" class="pregunta">
-            <h2 id="preguntaTexto">Brisa, ¿quieres ser mi Valentine?</h2>
+            <h2 id="preguntaTexto"></h2>
             <div class="botones">
                 <button id="btnSi" class="btn btn-si">💖 SÍ</button>
                 <button id="btnNo" class="btn btn-no">💔 NO</button>
@@ -147,11 +146,11 @@
 
         <!-- Pantalla 3: Aceptado -->
         <div id="aceptado" class="aceptado">
-            <h2>¡Gracias Brisa por aceptar! 💕</h2>
+            <h2 id="graciasTexto">¡Gracias por aceptar! 💕</h2>
             <div class="mensaje-especial">
-                <p>Antonio: Me haces muy feliz. Eres mi persona favorita.</p>
+                <p id="mensajePersonalizado"></p>
             </div>
-            <p style="font-size: 1.6rem;">Te quiero mucho, Brisa. Gracias por decir que sí. 💕</p>
+            <p id="teQuieroTexto" style="font-size: 1.6rem;"></p>
             <div class="corazones">💕 💖 💗 💝 💞</div>
             <button id="btnReinicio" class="btn-reinicio">✨ Crear otro momento ✨</button>
         </div>
@@ -161,12 +160,21 @@
         (function() {
             "use strict";
 
-            // ---------- CONFIGURACIÓN PERSONALIZABLE ----------
-            // Cambia estos valores para personalizar la tarjeta
-            const NOMBRE_PERSONA_ESPECIAL = "Brisa";   // ¿A quién va dedicado?
-            const NOMBRE_TUYO = "Antonio";            // Tu nombre
-            const TIPO_RELACION = "novios";           // Ej: novios, amigos, crush...
-            // ------------------------------------------------
+            // ---------- LEER PARÁMETROS DE LA URL ----------
+            // Esto es lo que faltaba: toma los nombres del enlace
+            function obtenerParametrosURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return {
+                    from: urlParams.get('from') || 'Antonio',
+                    to: urlParams.get('to') || 'Brisa',
+                    tipo: urlParams.get('tipo') || 'novios'
+                };
+            }
+
+            const params = obtenerParametrosURL();
+            const NOMBRE_TUYO = params.from;
+            const NOMBRE_PERSONA_ESPECIAL = params.to;
+            const TIPO_RELACION = params.tipo;
 
             // Elementos del DOM
             const pantallaInicio = document.getElementById('inicio');
@@ -176,6 +184,9 @@
             const btnSi = document.getElementById('btnSi');
             const btnNo = document.getElementById('btnNo');
             const btnReinicio = document.getElementById('btnReinicio');
+            const mensajePersonalizado = document.getElementById('mensajePersonalizado');
+            const teQuieroTexto = document.getElementById('teQuieroTexto');
+            const graciasTexto = document.getElementById('graciasTexto');
 
             // Variable para controlar si ya comenzó
             let juegoIniciado = false;
@@ -184,7 +195,8 @@
             function iniciarJuego() {
                 if (!juegoIniciado) {
                     juegoIniciado = true;
-                    // Actualizar textos personalizados
+                    
+                    // ACTUALIZAR TEXTOS CON LOS NOMBRES DE LA URL
                     preguntaTexto.textContent = `${NOMBRE_PERSONA_ESPECIAL}, ¿quieres ser mi Valentine?`;
                     
                     // Cambiar pantallas
@@ -194,28 +206,24 @@
                 }
             }
 
-            // Evento para presionar cualquier tecla en la pantalla de inicio
+            // Evento para presionar cualquier tecla
             window.addEventListener('keydown', function(e) {
                 if (pantallaInicio.classList.contains('activo')) {
                     iniciarJuego();
                 }
             });
 
-            // También permitir hacer clic en cualquier parte de la pantalla de inicio
+            // También permitir hacer clic
             pantallaInicio.addEventListener('click', function() {
                 iniciarJuego();
             });
 
             // Función para el SÍ
             function aceptarInvitacion() {
-                // Actualizar mensaje de aceptado con los nombres personalizados
-                const mensajePrincipal = pantallaAceptado.querySelector('.mensaje-especial p');
-                mensajePrincipal.innerHTML = `${NOMBRE_TUYO}: Me haces muy feliz. Eres mi persona favorita.`;
-                
-                const textoGracias = pantallaAceptado.querySelector('p[style="font-size: 1.6rem;"]');
-                if (textoGracias) {
-                    textoGracias.innerHTML = `Te quiero mucho, ${NOMBRE_PERSONA_ESPECIAL}. Gracias por decir que sí. 💕`;
-                }
+                // ACTUALIZAR TODOS LOS TEXTOS CON LOS NOMBRES DE LA URL
+                graciasTexto.textContent = `¡Gracias ${NOMBRE_PERSONA_ESPECIAL} por aceptar! 💕`;
+                mensajePersonalizado.innerHTML = `${NOMBRE_TUYO}: Me haces muy feliz. Eres mi persona favorita.`;
+                teQuieroTexto.innerHTML = `Te quiero mucho, ${NOMBRE_PERSONA_ESPECIAL}. Gracias por decir que sí. 💕`;
 
                 // Cambiar a pantalla de aceptado
                 pantallaInicio.classList.remove('activo');
@@ -231,11 +239,9 @@
                 const maxX = window.innerWidth - botonNo.offsetWidth - 100;
                 const maxY = window.innerHeight - botonNo.offsetHeight - 100;
                 
-                // Generar posiciones aleatorias
                 let randomX = Math.random() * maxX;
                 let randomY = Math.random() * maxY;
                 
-                // Asegurar que no se salga de los límites visibles
                 randomX = Math.max(10, Math.min(randomX, maxX));
                 randomY = Math.max(10, Math.min(randomY, maxY));
                 
@@ -251,29 +257,19 @@
                 moverBotonNo();
             });
 
-            // Botón de reinicio para volver a empezar
+            // Botón de reinicio
             btnReinicio.addEventListener('click', function() {
-                // Restablecer estado
                 juegoIniciado = false;
                 
-                // Resetear posición del botón NO
                 btnNo.style.position = 'relative';
                 btnNo.style.left = 'auto';
                 btnNo.style.top = 'auto';
                 
-                // Mostrar solo pantalla de inicio
                 pantallaInicio.classList.add('activo');
                 pantallaPregunta.classList.remove('activo');
                 pantallaAceptado.classList.remove('activo');
             });
 
-            // Personalización adicional basada en el tipo de relación (opcional)
-            if (TIPO_RELACION === "novios") {
-                // Puedes añadir detalles extra si quieres
-                document.querySelector('.corazones').innerHTML = '💕 💖 💗 💝 💞';
-            } else if (TIPO_RELACION === "amigos") {
-                document.querySelector('.corazones').innerHTML = '💛 💚 💙 💜 🧡';
-            }
         })();
     </script>
 </body>
