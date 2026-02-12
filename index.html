@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
 <title>Brisa ❤️</title>
 
 <style>
@@ -12,31 +15,41 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#ff8fb1,#ffc2d1);
-  font-family: Arial, sans-serif;
+  background:linear-gradient(135deg,#ff9ec4,#ffd6e7);
+  font-family:'Poppins',sans-serif;
   overflow:hidden;
 }
 
 .card{
   background:white;
   padding:30px;
-  border-radius:20px;
+  border-radius:25px;
   text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
-  max-width:320px;
+  box-shadow:0 15px 40px rgba(0,0,0,.2);
+  max-width:340px;
+  position:relative;
+  z-index:2;
 }
 
 h1{
-  color:#c2185b;
+  font-family:'Pacifico',cursive;
+  color:#d81b60;
+  font-size:32px;
+  margin:10px 0;
+}
+
+p{
+  font-size:18px;
 }
 
 button{
-  padding:12px 22px;
+  padding:12px 24px;
   font-size:18px;
   border:none;
-  border-radius:12px;
+  border-radius:14px;
   margin:10px;
   cursor:pointer;
+  transition:.2s;
 }
 
 #yes{
@@ -46,22 +59,26 @@ button{
 
 #no{
   background:#eee;
+  position:relative;
 }
 
 #final{
   display:none;
-  font-size:20px;
-  color:#c2185b;
+  font-size:22px;
+  color:#d81b60;
+  margin-top:15px;
+  font-weight:bold;
 }
 
 /* corazones */
 .heart{
  position:absolute;
- font-size:20px;
- animation:up 5s linear infinite;
+ bottom:-20px;
+ font-size:22px;
+ animation:subir linear forwards;
 }
 
-@keyframes up{
+@keyframes subir{
  to{
   transform:translateY(-110vh);
   opacity:0;
@@ -72,46 +89,57 @@ button{
 
 <body>
 
-<div class="card" id="card">
+<div class="card">
   <h1>Brisa 💖</h1>
-  <p>Mensaje de Antonio Velásquez</p>
-  <p>¿Quieres ser mi San Valentín?</p>
+  <p>Antonio Velásquez tiene una pregunta…</p>
+  <p><b>¿Quieres ser mi San Valentín?</b></p>
 
-  <button id="yes" onclick="acepto()">Sí 💘</button>
-  <button id="no" onmouseover="escapa()">No 🙈</button>
+  <button id="yes" onclick="acepto()">SÍ 💘</button>
+  <button id="no" onclick="noClick()" onmouseover="moverNo()">No 😅</button>
 
   <div id="final">
-    💞 Sabía que dirías que sí 💞<br><br>
-    Te quiero mucho Brisa ❤️<br>
-    — Antonio Velásquez
+    🎉 Sabía que dirías que sí 💞<br>
+    Te quiero muchísimo Brisa ❤️
   </div>
 </div>
 
 <script>
+let escalaNo = 1;
+
 function acepto(){
   document.getElementById("final").style.display="block";
 }
 
-/* botón que escapa */
-function escapa(){
-  const b=document.getElementById("no");
+/* botón NO se escapa y se achica */
+function moverNo(){
+  const b = document.getElementById("no");
   b.style.position="absolute";
   b.style.left=Math.random()*80+"vw";
   b.style.top=Math.random()*80+"vh";
+
+  escalaNo *= 0.85;
+  b.style.transform="scale("+escalaNo+")";
+}
+
+function noClick(){
+  moverNo();
 }
 
 /* corazones flotando */
-function heart(){
+function corazon(){
  const h=document.createElement("div");
  h.className="heart";
  h.innerHTML="💗";
  h.style.left=Math.random()*100+"vw";
+ h.style.animationDuration=(3+Math.random()*3)+"s";
  document.body.appendChild(h);
- setTimeout(()=>h.remove(),5000);
+ setTimeout(()=>h.remove(),6000);
 }
-setInterval(heart,400);
+
+setInterval(corazon,350);
 </script>
 
 </body>
 </html>
 
+  
