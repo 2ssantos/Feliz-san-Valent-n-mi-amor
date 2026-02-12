@@ -1,188 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De: Antonio Para: Brisa</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ff4d4d; /* El rojo característico de esa web */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            overflow: hidden;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        .card {
+            text-align: center;
+            padding: 20px;
+        }
 
-<title>Brisa ❤️</title>
+        .initial-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
 
-<style>
-body{
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(135deg,#ff9ec4,#ffd6e7);
-  font-family:'Poppins',sans-serif;
-  overflow:hidden;
-}
+        .btn-open {
+            background-color: white;
+            color: #ff4d4d;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
 
-.card{
-  background:white;
-  padding:30px;
-  border-radius:25px;
-  text-align:center;
-  box-shadow:0 15px 40px rgba(0,0,0,.2);
-  max-width:360px;
-  position:relative;
-  z-index:2;
-  animation:entrada .8s ease;
-}
+        .btn-open:hover {
+            transform: scale(1.1);
+        }
 
-@keyframes entrada{
- from{opacity:0; transform:scale(.9)}
- to{opacity:1; transform:scale(1)}
-}
+        .message-content {
+            display: none; /* Oculto al inicio */
+            animation: fadeIn 1s ease-in;
+        }
 
-h1{
-  font-family:'Pacifico',cursive;
-  color:#d81b60;
-  font-size:34px;
-  margin:8px 0;
-}
+        .message-content h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
 
-.sub{
-  font-size:14px;
-  color:#666;
-  margin-bottom:10px;
-}
+        .message-content p {
+            font-size: 1.4rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
 
-p{
-  font-size:18px;
-  margin:8px 0;
-}
+        .footer-name {
+            margin-top: 30px;
+            font-style: italic;
+            opacity: 0.9;
+        }
 
-.love{
-  font-size:16px;
-  color:#c2185b;
-  line-height:1.4;
-}
-
-button{
-  padding:12px 24px;
-  font-size:18px;
-  border:none;
-  border-radius:14px;
-  margin:10px;
-  cursor:pointer;
-  transition:.2s;
-}
-
-#yes{
-  background:#e91e63;
-  color:white;
-}
-
-#yes:hover{
-  transform:scale(1.12);
-}
-
-#no{
-  background:#eee;
-  position:relative;
-}
-
-#final{
-  display:none;
-  font-size:20px;
-  color:#d81b60;
-  margin-top:15px;
-  font-weight:bold;
-  animation:entrada 1s ease;
-}
-
-/* corazones flotando */
-.heart{
- position:absolute;
- bottom:-20px;
- font-size:22px;
- animation:subir linear forwards;
-}
-
-@keyframes subir{
- to{
-  transform:translateY(-110vh);
-  opacity:0;
- }
-}
-</style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="card">
+    <div class="card">
+        <div id="start" class="initial-content">
+            <h1>Para: Brisa ❤️</h1>
+            <button class="btn-open" onclick="revealMessage()">CLIC AQUÍ</button>
+        </div>
 
-  <h1>Brisa 💖</h1>
+        <div id="message" class="message-content">
+            <h2>¡Feliz San Valentín!</h2>
+            <p>Eres la persona más especial en mi vida. Gracias por ser mi novia y por cada momento juntos.</p>
+            <div class="footer-name">De: Antonio Velásquez</div>
+        </div>
+    </div>
 
-  <div class="sub">
-    Un mensaje especial de Antonio Velásquez ✨
-  </div>
-
-  <p class="love">
-    Desde que llegaste a mi vida,<br>
-    todo tiene más color,<br>
-    más risa y más sentido ❤️
-  </p>
-
-  <p class="love">
-    Me encanta tu sonrisa,<br>
-    tu forma de ser,<br>
-    y cada momento contigo 💞
-  </p>
-
-  <p><b>¿Quieres ser mi San Valentín?</b></p>
-
-  <button id="yes" onclick="acepto()">SÍ 💘</button>
-  <button id="no" onclick="noClick()" onmouseover="moverNo()">No 😅</button>
-
-  <div id="final">
-    🎉 ¡Sabía que dirías que sí! 🎉<br><br>
-    Prometo seguir haciéndote reír,<br>
-    cuidarte y quererte cada día más ❤️<br><br>
-    Feliz San Valentín, mi amor 🌹
-  </div>
-
-</div>
-
-<script>
-let escalaNo = 1;
-
-function acepto(){
-  document.getElementById("final").style.display="block";
-}
-
-/* botón NO se escapa y se achica */
-function moverNo(){
-  const b = document.getElementById("no");
-  b.style.position="absolute";
-  b.style.left=Math.random()*80+"vw";
-  b.style.top=Math.random()*80+"vh";
-
-  escalaNo *= 0.85;
-  b.style.transform="scale("+escalaNo+")";
-}
-
-function noClick(){
-  moverNo();
-}
-
-/* corazones flotando */
-function corazon(){
- const h=document.createElement("div");
- h.className="heart";
- const lista=["💗","💖","💘","💝","❤️"];
- h.innerHTML=lista[Math.floor(Math.random()*lista.length)];
- h.style.left=Math.random()*100+"vw";
- h.style.animationDuration=(3+Math.random()*3)+"s";
- document.body.appendChild(h);
- setTimeout(()=>h.remove(),6000);
-}
-
-setInterval(corazon,320);
-</script>
-
+    <script>
+        function revealMessage() {
+            document.getElementById('start').style.display = 'none';
+            document.getElementById('message').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
