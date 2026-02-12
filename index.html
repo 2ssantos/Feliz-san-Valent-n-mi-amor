@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Brisa ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9ec4, #ffd6e7);
+    text-align: center;
+    color: #7a003c;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    top: 15%;
+}
+
+h1 {
+    font-size: 3rem;
+    animation: fadeIn 2s ease-in-out;
+}
+
+h2 {
+    font-weight: normal;
+}
+
+button {
+    padding: 14px 26px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    background: #d81b60;
+    color: white;
+    cursor: pointer;
+}
+
+#mensaje {
+    display: none;
+    margin-top: 30px;
+    font-size: 1.4rem;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 24px;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform: translateY(20px);}
+    to {opacity:1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Brisa 💖</h1>
+    <h2>Mensaje especial de</h2>
+    <h3>Antonio Velásquez</h3>
+
+    <button onclick="mostrar()">Abrir mensaje 💌</button>
+
+    <div id="mensaje">
+        Desde que llegaste a mi vida todo es más bonito.<br><br>
+        Tu sonrisa ilumina mis días y tu forma de ser me enamora más cada vez.<br><br>
+        💘 ¿Quieres ser mi San Valentín? 💘<br><br>
+        Con amor,<br>
+        Antonio Velásquez
+    </div>
+</div>
+
+<script>
+function mostrar(){
+    document.getElementById("mensaje").style.display = "block";
+}
+
+function crearCorazon(){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💗";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (3 + Math.random()*4) + "s";
+    document.body.appendChild(heart);
+    setTimeout(()=> heart.remove(), 7000);
+}
+
+setInterval(crearCorazon, 300);
+</script>
+
+</body>
+</html>
